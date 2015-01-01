@@ -73,7 +73,7 @@ Remeber to add `from kivy.uix.label import Label` at the top of the
 file to import `Label` class. When we run the program, 
 it shows the window as the following picture. 
 
-![Hellow World Window](./images/0202.jpg)
+![Hello World Window](./images/0202.jpg)
 
 The method is very simple: it creates a `Label` class instance
 using a constructor argument `text='Hello World'`. The whole 
