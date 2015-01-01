@@ -44,6 +44,8 @@ certain conditions are met. For example, a mouse click or a touch gesture.
 Finally, Kivy allows developers to easily write event handlers and
 bind handlers to corresponding events. 
 
+## Kivy Architecture
+
 ## Developing Kivy Applications using PyCharm
 Because Kivy package toolchain has some issues to work in Python3, 
 we use Python 2.7 to develop Kivy applications and run them in both
