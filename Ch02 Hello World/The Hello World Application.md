@@ -14,8 +14,8 @@ functions for the App class.
 method to show its user interface. 
 
 ## A Minimum Kivy Program
-A minimum program `main.py` is created in the (`0201`)[./0201] subdirectory. 
-It has the following content: 
+A minimum program `main.py` is created in the (`./source0201`)[./source/0201] 
+subdirectory. It has the following content: 
     ```python
     # -*- coding: utf-8 -*-
 
@@ -76,7 +76,7 @@ it shows the window as the following picture.
 
 The method is very simple: it creates a `Label` class instance
 using a constructor argument `text='Hello World'`. The whole 
-program is in the [`0202`](./0202) folder. As a common mobile phone application, 
+program is in the [`./source/0202`](./source/0202) folder. As a common mobile phone application, 
 a Kivy application has a life cycle too. It starts when we ask Python
 to execute the `start()` method. The `start()` method calls the 
 application's `build()` to build and display the user interface. It 
@@ -112,7 +112,7 @@ It is also intuitive: here we define a `Label` whose text is "Hello World".
 From its filename we know this `Label` is defined for the `HelloWorldApp` 
 class. Run the `main.py` file that has the empty `HelloWorldApp` 
 class and we can see the same user interface. The whole application 
-are in the (`0203`)[./0203] folder. 
+are in the (`./source/0203`)[./source/0203] folder. 
 
 
 

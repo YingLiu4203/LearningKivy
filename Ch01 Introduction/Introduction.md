@@ -22,6 +22,12 @@ multi-touch applications.
 the user interface development and encourages good design.
 4. It has supporting tools to build, package and deploy an application 
 to run in different platforms. 
+
+Kivy makes modern multi-touch GUI application development much easier. 
+For example, [porting the popular 2048 game to Python](http://kivy.org/planet/2014/03/2048-in-python-kivy/)
+only takes several hours of an experienced Kivy developer. Kivy has been 
+used in a number of iOS and Android applications. 
+[Kivy gallery](http://kivy.org/#gallery) has many demo projects. 
  
 ### Kivy is a library/framework to develop GUI applications
 Another way to understand Kivy is from the development tasks required
@@ -67,10 +73,14 @@ inputs, and videos. Because these components are hidden below the
 middle layer services, developers don't need to deal with them 
 most of the time. 
 
+The middle and bottom layers let all Kivy applications run
+natively in all supported platforms. It is also optimized 
+to use specific features of the underlying platforms. 
 The following diagram in the [Python document website](http://kivy.org/docs/guide/architecture.html)
 shows the details and relationships among the three layers. 
 
 ![Kivy Architecture](http://kivy.org/docs/_images/architecture.png)
+
 
 ## Developing Kivy Applications using PyCharm
 Because Kivy package toolchain has some issues to work in Python3, 
@@ -108,11 +118,13 @@ this `Kivy Python` interpreter: `C:\kivy\kivy`.
 the `Project Interpreter` to add a new interpreter named `Kivy Bootstrapper` 
 that uses the newly created symbol link `C:\kivy\python.bat` as the intepreter.
 7. Create a `main.py` in the `hello_wolrd` project with the following two lines:
+
     ```python
     from kivy.app import App
     
     App().run()
     ```
+    The file is create in [./source](./source) folder. 
 8. In the `Run --> Edit Configurations` menu, click the plus button 
 to add a configuration called `Kivy Configuration`, use the `main.py` 
 as the script, use the `Kivy Bootstrapper` as the interpreter.
