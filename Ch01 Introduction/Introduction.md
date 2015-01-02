@@ -45,6 +45,32 @@ Finally, Kivy allows developers to easily write event handlers and
 bind handlers to corresponding events. 
 
 ## Kivy Architecture
+There are many components in the Kivy library. These components 
+can be classified into three layers: the top layer include components 
+used by Kivy developers directly. All components, except the Kv language,
+in the top layers are provided as Python classes. They include dozens of 
+widgets, clock, cache, gesture, events, properties, etc. The Kv language
+in the top layer is used to describe the user interface of a Kivy 
+application. 
+
+The middle layer includes core providers, graphics, and inputs components. 
+The middle layer provides a consistent service layer that acts as 
+an abstraction of the runtime platforms. The abstraction allows a 
+developers to use the same APIs to open windows, play videos/audios, 
+draw graphics, display images, get images from a camera, process  
+input events, etc. During deployment, Kivy packages different 
+middle layer components for different runtime platforms. 
+
+The bottom layer consists of many existing Python tools and 
+Kivy-specific tools to work with the low level graphics, images, 
+inputs, and videos. Because these components are hidden below the 
+middle layer services, developers don't need to deal with them 
+most of the time. 
+
+The following diagram in the [Python document website](http://kivy.org/docs/guide/architecture.html)
+shows the details and relationships among the three layers. 
+
+![Kivy Architecture](http://kivy.org/docs/_images/architecture.png)
 
 ## Developing Kivy Applications using PyCharm
 Because Kivy package toolchain has some issues to work in Python3, 

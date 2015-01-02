@@ -38,9 +38,8 @@ to make it clear that it's a subclass of the `App` class.
 Inside the class definition, the only statement `pass` means that 
 we don't build any user interface elements. Therefore Kivy will 
 display a blank window when we run it using the class's `run()` method.
-This is the third step 
-Running the `main.py` script using the PyCharm and Kivy configurations 
-described in chapter 1 shows a blank window -- as expected. 
+This is the third step. Running the `main.py` script shows 
+a blank window -- as we expect. 
 
 ## Saying "Hello World" 
 There are two approaches to build the user interface for a Kivy application: 
