@@ -106,10 +106,10 @@ in lower cases as its application class  and 2) it does not have
 the `App` postfix. In our case, the file is named as `helloworld.kv`.
 It has the following content:
 
-    ```
-    Label:
-        text: "Hello World"
-    ```
+```
+Label:
+    text: "Hello World"
+```
     
 A kvlang file uses the same indention syntax as the Python code.
 It is also intuitive: here we define a `Label` whose text is "Hello World". 
