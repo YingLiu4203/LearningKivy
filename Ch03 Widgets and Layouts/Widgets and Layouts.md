@@ -21,7 +21,7 @@ A widget may trigger some events such as touch down, touch move,
 and touch up. For example, the following kvlang code
 describes a `Label` element whose `text` property is "Hello World".
  
-```python
+```
 Label:
     text: "Hello World"
 ```
@@ -50,7 +50,7 @@ declared using indentation. The following kvlang code describes a
 `GridLayout` widget that has two `Label` elements as its child
 widgets. 
 
-```python
+```
 GridLayout:
     Label:
         text: "Hello World"
@@ -96,7 +96,7 @@ from kivy.uix.label import Label
 class HelloWorldApp(App):
     def build(self):
         layout = GridLayout(cols=2)
-        hello_label = Label(text="Hello World2")
+        hello_label = Label(text="Hello World")
         best_label = Label(text="Best Regards")
         layout.add_widget(hello_label)
         layout.add_widget(best_label)
@@ -105,6 +105,7 @@ class HelloWorldApp(App):
 if __name__ == '__main__':
     HelloWorldApp().run()
 ```
+
 
 
 
