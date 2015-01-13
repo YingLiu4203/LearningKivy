@@ -66,7 +66,7 @@ in the Kv file thus it is a root widget. Running the `main.py`
 and `helloworld.kv` in the folder [./source/0301](./source/0301) 
 will display the following window: 
 
-![Two-Leable Window](./images/0301.jpg)
+![Two-Label Window](./images/0301.jpg)
 
 ## Manage Widget Tree Using Python Code
 Many times we want to change a widget tree at runtime to give a 
@@ -184,7 +184,7 @@ The app places the bottom-left corner of the button 1 at the `(100, 100)`
 and the bottom-left corner of the button 2 at the `(100, 300)` 
 position of the root widget. The diagram is as the following: 
 
-![Default Size Position Window](./images/0302.jpg)
+![Set Position Window](./images/0303.jpg)
 
 
 
