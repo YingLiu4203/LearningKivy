@@ -115,5 +115,84 @@ We need the `cols=2` constructor parameter to put the two labels
 side-by-side in the middle. Then we create two labels with their texts
 and add them to the layout using the `add_widget` method.
 
-## Widget Size
-An essential property of a graphic interface component is its size.
+## Widget Size and Position
+Two essential properties of any graphic interface component are 
+its size and position. Kivy follows some simple principles to manage
+the size and position of all widgets in a user interface. 
+
+Most widgets have a default size and a default position. 
+For example, the following code in [./source/0303](./source/0303)
+shows the default size and position of three widgets: a root 
+widgets and two button child widgets. 
+
+```python
+from kivy.app import App
+from kivy.uix.widget import Widget
+from kivy.uix.button import Button
+
+
+class SizePositionApp(App):
+    def build(self):
+        root_widget = Widget()
+        button_1 = Button()
+        button_2 = Button()
+        root_widget.add_widget(button_1)
+        root_widget.add_widget(button_2)
+        return root_widget
+
+
+if __name__ == '__main__':
+    SizePositionApp().run()
+```
+
+This app display the following diagram.
+
+![Default Size Position Window](./images/0302.jpg)
+
+In a Windows desktop, a root widgets uses all space of the user 
+interface window. In my Windows 8.1 computer, 
+the Kivy root window has a default size of 1020 * 799, 
+i.e., a width of 1020 pixels and a height of 799 pixels. 
+The window has a default position that is on the top 
+right part of the computer screen. 
+A button widget has a default size of 100 * 100 pixels. 
+The default position is on the bottom left corner of its parent. 
+In the above diagram we can only see one button because one is 
+on top of the other one.
+
+In Kivy, the sizing and positioning decision involves both 
+a parent widgets and all its children: 
+a child widget specifies its size or position parameters 
+and it is up to its parent, the one that has the "big" view, 
+to determine the actual size/position values of its children. 
+In some situations a parent widget may choose to use its rules and 
+ignore its children's size and position specifications.
+
+Kivy uses a pair of `(x, y)` coordinates to specify the position of
+a widget in its parent. `x` is the horizontal value where `0` means
+the left side. Similarly, `y` is tht vertical value where `0` means
+the bottom of a widget. In the above code, the default positions of both
+buttons are `(0,0)` in the root widget. To change their positions,
+we can set the `pos` property using the following code:
+ 
+```python
+button_1 = Button(pos=(100, 100))
+button_2 = Button(pos=(100, 300))
+```
+
+The app places the bottom-left corner of the button 1 at the `(100, 100)` 
+and the bottom-left corner of the button 2 at the `(100, 300)` 
+position of the root widget. The diagram is as the following: 
+
+![Default Size Position Window](./images/0302.jpg)
+
+
+
+
+
+
+
+ 
+
+
+
