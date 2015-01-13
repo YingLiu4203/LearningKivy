@@ -115,3 +115,5 @@ We need the `cols=2` constructor parameter to put the two labels
 side-by-side in the middle. Then we create two labels with their texts
 and add them to the layout using the `add_widget` method.
 
+## Widget Size
+An essential property of a graphic interface component is its size.
