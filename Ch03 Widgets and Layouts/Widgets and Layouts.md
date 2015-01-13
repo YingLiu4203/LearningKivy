@@ -85,24 +85,24 @@ iterate over the list using a `for` statement such as
 To make a user interface that has two labels as the above example, 
 we can use the following code from [./source/0302](./source/0302):
 
-    ```python
-    from kivy.app import App
-    from kivy.uix.gridlayout import GridLayout
-    from kivy.uix.label import Label
-    
-    
-    class HelloWorldApp(App):
-        def build(self):
-            layout = GridLayout(cols=2)
-            hello_label = Label(text="Hello World2")
-            best_label = Label(text="Best Regards")
-            layout.add_widget(hello_label)
-            layout.add_widget(best_label)
-            return layout
-    
-    if __name__ == '__main__':
-        HelloWorldApp().run()
-    ```
+```python
+from kivy.app import App
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.label import Label
+
+
+class HelloWorldApp(App):
+    def build(self):
+        layout = GridLayout(cols=2)
+        hello_label = Label(text="Hello World2")
+        best_label = Label(text="Best Regards")
+        layout.add_widget(hello_label)
+        layout.add_widget(best_label)
+        return layout
+
+if __name__ == '__main__':
+    HelloWorldApp().run()
+```
 
 
 
