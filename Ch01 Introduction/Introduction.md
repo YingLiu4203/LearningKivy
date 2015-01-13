@@ -91,43 +91,43 @@ PyCharm is a great Python IDE that has many productivity features
 to develop Python applications. The following are steps used to 
 setting up PyCharm for Kivy development in Windows.  
 
-#### 1. Download Python 2.7.9 from https://www.python.org/downloads/. 
+###### 1. Download Python 2.7.9 from https://www.python.org/downloads/. 
 Double-click the downloaded file to install it in Windows.  
 Assuming that your Python installation is in `C:\Python27\`, 
 add the following two paths to your PATH:
 `C:\Python27\;C:\Python27\Scripts\`
-#### 2. Download PyCharm 4.0.x from https://www.jetbrains.com/pycharm/download/.
+###### 2. Download PyCharm 4.0.x from https://www.jetbrains.com/pycharm/download/.
 The professional edition is recommended for its rich functions. Run 
 the downloaded exe file to start the installation wizard. Follow the
 wizard instructions to install Pycharm.  
-#### 3. Download Kivy 1.8 for Python 2.7 from http://kivy.org/downloads/1.8.0/Kivy-1.8.0-py2.7-win32.zip.
+###### 3. Download Kivy 1.8 for Python 2.7 from http://kivy.org/downloads/1.8.0/Kivy-1.8.0-py2.7-win32.zip.
 Unzip the download file to a folder, for example, `C:\kivy`. 
-#### 4. In Windows, run `cmd` as an administrator to open a shell window. 
+###### 4. In Windows, run `cmd` as an administrator to open a shell window. 
 Go to `C:\kivy`, create a symbol link for `kivy.bat` using this command: 
 `mklink python.bat kivy.bat`. The `python.bat` file is a newly-created symbol 
 link of `kivy.bat`. 
-#### 5. Create a new Python project `hello_world` in PyCharm using the 
+###### 5. Create a new Python project `hello_world` in PyCharm using the 
 `File --> New Project` menu . Click the tool icon on the right side of the 
 project interpreter drop list, click `More --> +` to add the 
 `C:\kivy\Python27\python..exe` as the project interpreter. I like to name
 it as `Kivy Python`. Then on the right side of this interpreter, click the 
 last icon (the path icon) and the plus icon to add the following path to 
 this `Kivy Python` interpreter: `C:\kivy\kivy`.
-#### 6. In `File --> settings`, under the `hello_world` project, click 
+###### 6. In `File --> settings`, under the `hello_world` project, click 
 `project interpreter`, click the tool icon on the right side of 
 the `Project Interpreter` to add a new interpreter named `Kivy Bootstrapper` 
 that uses the newly created symbol link `C:\kivy\python.bat` as the intepreter.
-#### 7. Create a `main.py` in the `hello_wolrd` project with the following two lines:
+###### 7. Create a `main.py` in the `hello_wolrd` project with the following two lines:
 
 ```python
 from kivy.app import App
 
 App().run()
 ```
-    The file is create in [./source](./source) folder. 
-#### 8. In the `Run --> Edit Configurations` menu, click the plus button 
+The file is create in [./source](./source) folder. 
+###### 8. In the `Run --> Edit Configurations` menu, click the plus button 
 to add a configuration called `Kivy Configuration`, use the `main.py` 
 as the script, use the `Kivy Bootstrapper` as the interpreter.
-#### 9. Run the `Kivy Configuration`, you should see a blank window. 
+###### 9. Run the `Kivy Configuration`, you should see a blank window. 
 
 
