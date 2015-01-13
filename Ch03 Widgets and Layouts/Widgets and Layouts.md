@@ -21,10 +21,11 @@ A widget may trigger some events such as touch down, touch move,
 and touch up. For example, the following kvlang code
 describes a `Label` element whose `text` property is "Hello World".
  
-    ```
-    Label:
-        text: "Hello World"
-    ```
+```python
+Label:
+    text: "Hello World"
+```
+
 In Python convention, the class name uses so-called Pascal casing 
 that the first letter of a word is an uppercase letter. Widget 
 properties such as `text` are lower-case.
@@ -49,13 +50,14 @@ declared using indentation. The following kvlang code describes a
 `GridLayout` widget that has two `Label` elements as its child
 widgets. 
 
-    ```
-    GridLayout:
-        Label:
-            text: "Hello World"
-        Label:
-            text: "Best Regards"
-    ```
+```python
+GridLayout:
+    Label:
+        text: "Hello World"
+    Label:
+        text: "Best Regards"
+```
+
 In this Kivy file, the `GridLayout` is one of many Kivy layout widgets 
 that can have multiple child widgets. It is the leftmost widget 
 in the Kv file thus it is a root widget. Running the `main.py` 

@@ -16,18 +16,18 @@ method to show its user interface.
 ## A Minimum Kivy Program
 A minimum program `main.py` is created in the (`./source0201`)[./source/0201] 
 subdirectory. It has the following content: 
-    ```python
-    # -*- coding: utf-8 -*-
 
-    from kivy.app import App
+```python
+from kivy.app import App
 
 
-    class HelloWorldApp(App):
-        pass
-    
-    if __name__ == '__main__':
-        HelloWorldApp().run()
-    ```
+class HelloWorldApp(App):
+    pass
+
+if __name__ == '__main__':
+    HelloWorldApp().run()
+```
+
 The first line `# -*- coding: utf-8 -*-` tells Python that this program
 uses `utf-8` coding. It's a good idea to use `utf-8` coding for all 
 program code and strings. Then we import the App class from `kivy.app` 
@@ -64,10 +64,12 @@ a user interface element. To say "Hello World", we define a
 `build()` method in the `HelloWorldApp` class. In the method we create 
 a `Label` widget and set its text to "Hello World", as shown in the 
 following code: 
-    ```python
-    def build(self):
-        return Label(text='Hello World')
-    ```
+
+```python
+def build(self):
+    return Label(text='Hello World')
+```
+
 Remeber to add `from kivy.uix.label import Label` at the top of the
 file to import `Label` class. When we run the program, 
 it shows the window as the following picture. 
@@ -103,20 +105,15 @@ requirements for its name: 1) it should have the same name
 in lower cases as its application class  and 2) it does not have 
 the `App` postfix. In our case, the file is named as `helloworld.kv`.
 It has the following content:
+
     ```
     Label:
         text: "Hello World"
     ```
+    
 A kvlang file uses the same indention syntax as the Python code.
 It is also intuitive: here we define a `Label` whose text is "Hello World". 
 From its filename we know this `Label` is defined for the `HelloWorldApp` 
 class. Run the `main.py` file that has the empty `HelloWorldApp` 
 class and we can see the same user interface. The whole application 
 are in the (`./source/0203`)[./source/0203] folder. 
-
-
-
-
-
-  
-

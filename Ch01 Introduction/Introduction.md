@@ -119,11 +119,11 @@ the `Project Interpreter` to add a new interpreter named `Kivy Bootstrapper`
 that uses the newly created symbol link `C:\kivy\python.bat` as the intepreter.
 7. Create a `main.py` in the `hello_wolrd` project with the following two lines:
 
-    ```python
-    from kivy.app import App
-    
-    App().run()
-    ```
+```python
+from kivy.app import App
+
+App().run()
+```
     The file is create in [./source](./source) folder. 
 8. In the `Run --> Edit Configurations` menu, click the plus button 
 to add a configuration called `Kivy Configuration`, use the `main.py` 
