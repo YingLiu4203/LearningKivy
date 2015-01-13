@@ -130,4 +130,5 @@ to add a configuration called `Kivy Configuration`, use the `main.py`
 as the script, use the `Kivy Bootstrapper` as the interpreter.
 ###### 9. Run the `Kivy Configuration`, you should see a blank window. 
 
-
+## Exercises
+Please try to create a Kivy application that displays "Hello Kivy" message. 

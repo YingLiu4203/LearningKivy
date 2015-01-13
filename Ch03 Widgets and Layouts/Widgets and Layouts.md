@@ -14,6 +14,8 @@ new widgets or extend/compose existing widgets
 into new widgets. As shown in the previous chapter, a widget can be 
 created either by Python code or by a Kv file. Kv files are 
 preferred because of its independence, simplicity, and clear syntax.
+However, many times we need to use Python code to manage 
+a user interface dynamically. 
 
 A widget is represented by a subclass of the `kivy.uix.widget.Widget`
 class. A widget may properties such as id, color, text, font size, etc. 
@@ -102,10 +104,14 @@ class HelloWorldApp(App):
         layout.add_widget(best_label)
         return layout
 
+
 if __name__ == '__main__':
     HelloWorldApp().run()
 ```
 
-
-
+In the `build` method of the `HelloWorldApp` class (a subclass of the 
+Kivy's `App` class), we first create a `GridLayout` that has two columns. 
+We need the `cols=2` constructor parameter to put the two labels 
+side-by-side in the middle. Then we create two labels with their texts
+and add them to the layout using the `add_widget` method.
 

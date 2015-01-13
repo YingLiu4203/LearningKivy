@@ -12,7 +12,7 @@ class HelloWorldApp(App):
         best_label = Label(text="Best Regards")
         layout.add_widget(hello_label)
         layout.add_widget(best_label)
-        return layout
+
 
 if __name__ == '__main__':
     HelloWorldApp().run()

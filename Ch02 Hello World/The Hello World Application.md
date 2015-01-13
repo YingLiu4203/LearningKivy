@@ -66,11 +66,19 @@ a `Label` widget and set its text to "Hello World", as shown in the
 following code: 
 
 ```python
-def build(self):
-    return Label(text='Hello World')
+from kivy.app import App
+from kivy.uix.label import Label
+
+
+class HelloWorldApp(App):
+    def build(self):
+        return Label(text='Hello World')
+
+if __name__ == '__main__':
+    HelloWorldApp().run()
 ```
 
-Remeber to add `from kivy.uix.label import Label` at the top of the
+Remember to add `from kivy.uix.label import Label` at the top of the
 file to import `Label` class. When we run the program, 
 it shows the window as the following picture. 
 
@@ -78,11 +86,13 @@ it shows the window as the following picture.
 
 The method is very simple: it creates a `Label` class instance
 using a constructor argument `text='Hello World'`. The whole 
-program is in the [`./source/0202`](./source/0202) folder. As a common mobile phone application, 
-a Kivy application has a life cycle too. It starts when we ask Python
-to execute the `start()` method. The `start()` method calls the 
-application's `build()` to build and display the user interface. It 
-then runs in an infinite loop waiting for events. It may pause the 
+program is in the [`./source/0202`](./source/0202) folder. 
+
+As a common mobile phone application, a Kivy application has a life cycle too. 
+It starts when we ask Python to execute the `start()` method. 
+The `start()` method calls the application's `build()` to build 
+and display the user interface. It then runs in an infinite 
+loop waiting for events. It may pause the 
 application, resume the application or stop and destroy the application.
 A simplified view of an application's life cycle is depicted in 
 the following picture in Kivy's document web site.
@@ -117,3 +127,8 @@ From its filename we know this `Label` is defined for the `HelloWorldApp`
 class. Run the `main.py` file that has the empty `HelloWorldApp` 
 class and we can see the same user interface. The whole application 
 are in the (`./source/0203`)[./source/0203] folder. 
+
+## Exercises
+Please define a `HelloKivyApp` class to display a message "Hello KIvy". 
+Then write another application that use a Kv file, 
+instead of Python code, to display the same message.  
