@@ -198,12 +198,62 @@ The user interface is shown in the following diagram.
 
 ![Size Hint](./images/0402.jpg)
 
+## Controlled Dimension
+There is an important concept called "controlled dimension" 
+in a box layout. The controlled dimension is the orientation of a 
+box layout. In default, the controlled dimension is the default 
+orientation that is `horizontal`. A box layout control (manage, automatic
+assign) the sizes of its children in the controlled dimension using 
+a simple calculation: a child's relative size is its hint size divided
+by the sum of all children's hint size. 
+
+In the above example, the controlled dimension of the root 
+box layout widget is `vertical`, thus the relative height of the 
+first child is `200 / (200 + 600)`, i.e., 25% of the total height. 
+Similarly, the relative height of the second child is 75% that is 
+the result of `600 / (200 + 600)`. 
+
+The controlled dimensions of both child box layouts are `horizontal`, 
+therefore they control the width of each button inside them, 
+independently in the scope of each box layout. The two buttons
+in the first child layout occupy 25% and 75% width based on their
+width hints. The two buttons in the second child layout occupy 
+80% and 20% based on their width hints.
+
+For an uncontrolled dimension of a box layout, there is only one 
+widget in this dimension. In default, the hint size is 1 in the 
+uncontrolled dimension and it takes all space in this dimension. 
+A hint size that is smaller than 1 in the uncontrolled dimension 
+reduces the size in this dimension. A value bigger than 1 
+is ignored. In the sample code in [./source/0403](./source/0403), 
+there is only one box layout with one child button. The code is below:
+
+```
+BoxLayout:
+    orientation: 'vertical'
+    Button:
+        size_hint_x: 0.5
+        size_hint_y: 0.5
+```
+
+The controlled dimension is `vertical`, therefore the height of the
+button is the same height as its parent box layout. Why? 
+
+Because `0.5 / 0.5` is 100% in the controlled dimension. 
+
+On the other hand, the width of the button is only 50% of its 
+parent because box layout honors this hint in the uncontrolled dimension.
+It is shown in the following diagram: 
+
+![Controlled Dimension](./images/0403.jpg)
+ 
+
 ## Using Absolute Size in a Layout
 When use an absolute size for a child widget in a layout, we must 
 explicitly set the corresponding size hint to `None`. Otherwise,
 Kivy still use the default relative hint size of 1 as the 
 size of a child widget. For example, the `height` and `width` 
-property don't work in the following Kv code in [./source/0403](./source/0403).
+property don't work in the following Kv code in [./source/0404](./source/0404).
 
 ```
 BoxLayout:
@@ -225,10 +275,10 @@ BoxLayout:
 
 The user interface for the above code is shown in the following diagram. 
 
-![Size Hint](./images/0403.jpg)
+![Size Hint](./images/0404.jpg)
 
 When we set the corresponding size hint to `None`, as shown in the 
-following code in [./source/0403](./source/0403), it gives the correct
+following code in [./source/0405](./source/0405), it gives the correct
 result. 
 
 ```
@@ -254,7 +304,7 @@ BoxLayout:
 
 The user interface for the above code is shown in the following diagram. 
 
-![Size Hint](./images/0404.jpg)
+![Size Hint](./images/0405.jpg)
 
 ## Exercises
 Please implement a user login window that has the following components:
