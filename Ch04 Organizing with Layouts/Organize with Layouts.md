@@ -250,12 +250,15 @@ The user interface for the above code is shown in the following diagram.
 
 ![Size Hint](./images/0404.jpg)
 
+## Exercises
+Please implement a user login window that has the following components:
 
+* A "Welcome" text at the top middle of the window.
+* A "User Name: " text followed by an input box
+* A "Password: " text followed by an input box
+* A button has a text "Submit" at the button center of the window.
  
-
-
-
- 
-
-
-
+Please make sure that the size and position of everything 
+look good in both a smart phone and in a large 30 inch 
+computer monitor. The left side of two texts should be horizontally
+aligned . So are the left side of two input boxes.  
