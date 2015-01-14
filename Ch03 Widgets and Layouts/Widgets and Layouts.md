@@ -147,7 +147,7 @@ if __name__ == '__main__':
 
 This app display the following diagram.
 
-![Default Size Position Window](./images/0302.jpg)
+![Default Size Position Window](./images/0303.jpg)
 
 In a Windows desktop, a root widgets uses all space of the user 
 interface window. In my Windows 8.1 computer, 
@@ -173,7 +173,8 @@ a widget in its parent. `x` is the horizontal value where `0` means
 the left side. Similarly, `y` is tht vertical value where `0` means
 the bottom of a widget. In the above code, the default positions of both
 buttons are `(0,0)` in the root widget. To change their positions,
-we can set the `pos` property using the following code:
+we can set the `pos` property using the following code 
+in [./source/0304](./source/0304):
  
 ```python
 button_1 = Button(pos=(100, 100))
@@ -184,11 +185,20 @@ The app places the bottom-left corner of the button 1 at the `(100, 100)`
 and the bottom-left corner of the button 2 at the `(100, 300)` 
 position of the root widget. The diagram is as the following: 
 
-![Set Position Window](./images/0303.jpg)
+![Set Position Window](./images/0304.jpg)
 
+The `pos` parameter specifies the horizontal `x` and vertical 
+`y` properties of a widget. Actually, `x`, `y` and `pos` are 
+all properties of a widget. The above two lines could be written
+as the following to have the same effect: 
 
-
-
+```python
+button_1 = Button()
+button_1.pos = (100, 100)
+button_2 = Button()
+button_2.x = 100
+button_2.y = 300
+```
 
 
 

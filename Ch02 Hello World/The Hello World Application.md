@@ -14,7 +14,7 @@ functions for the App class.
 method to show its user interface. 
 
 ## A Minimum Kivy Program
-A minimum program `main.py` is created in the (`./source0201`)[./source/0201] 
+A minimum program `main.py` is created in the [`./source0201`](./source/0201) 
 subdirectory. It has the following content: 
 
 ```python
@@ -40,6 +40,8 @@ we don't build any user interface elements. Therefore Kivy will
 display a blank window when we run it using the class's `run()` method.
 This is the third step. Running the `main.py` script shows 
 a blank window -- as we expect. 
+
+![Blank Window](./images/0201.jpg)
 
 ## Saying "Hello World" 
 There are two approaches to build the user interface for a Kivy application: 
