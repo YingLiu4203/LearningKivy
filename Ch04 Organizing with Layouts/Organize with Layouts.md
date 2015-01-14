@@ -192,7 +192,66 @@ The user interface is shown in the following diagram.
 
 ![Size Hint](./images/0402.jpg)
 
+## Using Absolute Size in a Layout
+When use an absolute size for a child widget in a layout, we must 
+explicitly set the corresponding size hint to `None`. Otherwise,
+Kivy still use the default relative hint size of 1 as the 
+size of a child widget. For example, the `height` and `width` 
+property don't work in the following Kv code in [./source/0403](./source/0403).
 
+```
+BoxLayout:
+    orientation: 'vertical'
+    BoxLayout:
+        height: "200dp"
+        Button:
+            size_hint_x: 2
+        Button:
+            size_hint_x: 6
+    BoxLayout:
+        height: "200dp"
+        width: "200dp"
+        Button:
+            size_hint_x: 2
+        Button:
+            size_hint_x: 0.5
+```
+
+The user interface for the above code is shown in the following diagram. 
+
+![Size Hint](./images/0403.jpg)
+
+When we set the corresponding size hint to `None`, as shown in the 
+following code in [./source/0403](./source/0403), it gives the correct
+result. 
+
+```
+BoxLayout:
+    orientation: 'vertical'
+    BoxLayout:
+        height: "200dp"
+        size_hint_y: None
+        Button:
+            size_hint_x: 2
+        Button:
+            size_hint_x: 6
+    BoxLayout:
+        height: "200dp"
+        size_hint_y: None
+        width: "200dp"
+        size_hint_x: None
+        Button:
+            size_hint_x: 2
+        Button:
+            size_hint_x: 0.5
+```
+
+The user interface for the above code is shown in the following diagram. 
+
+![Size Hint](./images/0404.jpg)
+
+
+ 
 
 
 
