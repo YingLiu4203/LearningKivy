@@ -126,14 +126,20 @@ The `dp` standards for "density-independent pixels" or
 "display pixel". It is a size that is resolution-independent. 
 To make it simple, we can think it as 1/72 inch -- like a pixel in a
 typical laptop. In other words, one inch is roughly equals to 72dp.
-It is recommend to **use `dp` to specify widget size**.
+It is recommend to use `dp` to specify widget size.
 
 The `sp` standards for `scale-independent pixels`. It is like
 the `dp` unit but scales with the user's font size. 
-It is recommended to **use `sp` as the unit for font size**. 
+It is recommended to use `sp` as the unit for font size. 
 
 The size-related properties include `width`, `height`, `size` and
-`font-size`. The `size` is a tuple of `(width, height)`. 
+`font-size`. The `size` is a tuple of `(width, height)`.
+
+In general, there are two simple metric unit recommendations:
+
+* Use `dp` for `width` and `height`
+* Use `sp` for `font-size`
+
 Below are some examples of absolute sizes: 
 
 ```python
@@ -143,7 +149,7 @@ rectangle.size = ('60dp', '20dp')
 user_label.font_size = '15sp'
 ```
 
-In Kivy, the default size of a widget is `(100px, 100px)`.
+In Kivy, the default size of a widget is `(100px, 100px)`. 
  
 ## Size Hint
 Size hints are relative size. They are `int` or `float` values

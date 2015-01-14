@@ -101,7 +101,7 @@ the following picture in Kivy's document web site.
 
 ![Kivy App Life Cycle](http://kivy.org/docs/_images/Kivy_App_Life_Cycle.png)
 
-## Using Kv Language
+## Using a Kv File for User Interface
 As mention in the above section, the second approach to define a 
 user interface is to use the Kv language. The Kv language, often referred 
 to as `kvlang`, is a simple markup language like HTML. It allows developers
@@ -110,8 +110,22 @@ a strong Python taste.
 
 Instead of defining a `build()` method in the `HelloWorldApp` class, 
 we keep the `pass` statement as the only statement in the `HelloWorldApp` 
-class to make it an empty class. Then we create a kvlang file to 
-define the same `Hello World` label as we did in the previous section. 
+class to make it an empty class. The following is the Python code.
+
+```python
+from kivy.app import App
+from kivy.uix.label import Label
+
+
+class HelloWorldApp(App):
+    pass
+
+if __name__ == '__main__':
+    HelloWorldApp().run()
+```
+
+Then we create a kvlang file to define the same `Hello World` 
+label as we did in the previous section. 
 Kivy requires a kvlang file has a `.kv` postfix. There are two more 
 requirements for its name: 1) it should have the same name
 in lower cases as its application class  and 2) it does not have 
@@ -129,6 +143,16 @@ From its filename we know this `Label` is defined for the `HelloWorldApp`
 class. Run the `main.py` file that has the empty `HelloWorldApp` 
 class and we can see the same user interface. The whole application 
 are in the (`./source/0203`)[./source/0203] folder. 
+
+## No Magic
+There is no magic happened in the above Kv file example. Here is what 
+happened to the Kv file: 
+
+* Kivy first loads and parses the Kv file, creates a `Label` object with 
+its `text` property set to "Hello World"
+* From the file name, Kivy is able to link the newly-created
+`Label` object to `HelloWorld` app class. This object 
+is used as the return value of its `build` method.
 
 ## Exercises
 Please define a `HelloKivyApp` class to display a message "Hello KIvy". 
