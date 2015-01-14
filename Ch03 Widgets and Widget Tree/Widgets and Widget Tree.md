@@ -154,11 +154,11 @@ sizing and positing behaviors. This app display the following diagram.
 
 In a Windows desktop, a root widgets uses all space of the user 
 interface window. In my Windows 8.1 computer, 
-the Kivy root window has a default size of 1020px * 799px, 
+the Kivy root window has a default size of 1020px and 799px, 
 i.e., a width of 1020 pixels and a height of 799 pixels. 
 The window has a default position that is on the top 
 right part of the computer screen. 
-A button widget has a default size of 100px * 100px. 
+A button widget has a default size of 100px width and 100px length. 
 The default position is on the bottom left corner of its parent. 
 In the above diagram we can only see one button because one is 
 on top of the other one.
@@ -204,7 +204,7 @@ button_2.y = 300
 ```
 
 Similarly, Kivy uses `width`, `height` and `size` to specify a
-widget size. The following code in [./source/0304](./source/0304)
+widget size. The following code in [./source/0305](./source/0305)
 increase each side of a widget to 150px: 
 
 ```python
@@ -241,6 +241,43 @@ Managing size and position is a complex task for any non-trivial
 GUI application. Luckily, Kivy provides a rich set of layout class
 and methods to simplify this task. 
 
+## Use a Kv File to Set Size and Position
+It is more straightforward to use a Kv file to specify the size
+and position values of a widget. The last example places two 
+buttons at the location of (100, 100) and (100, 300). It
+sets the button's height and width to 150px. Using a Kv file
+`sizeposition.kv` that is named after the widget's class name 
+(all lowercase without the "App" postfix), it is easy to 
+make the same user interface with the following code:
+
+```
+Widget:
+    Button:
+        pos: 100, 100
+        size: 150, 150
+    Button:
+        x: 100
+        y: 300
+        width: 150
+        height: 150
+```
+
+The Python code `main.py` file becomes much smaller as shown below:
+
+```Python
+from kivy.app import App
+
+
+class SizePositionApp(App):
+    pass
+
+if __name__ == '__main__':
+    SizePositionApp().run()
+```
+
+All files can be found in the [./source/0305](./source/0305) folder. 
+
 ## Exercises:
 Try to play other widgets such as `Label` or `Image` to set
-their positions and sizes. 
+their positions and sizes. Use both a Kv file method and the Python
+code method to set a widget's size and position.
