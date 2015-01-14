@@ -145,17 +145,18 @@ if __name__ == '__main__':
     SizePositionApp().run()
 ```
 
-This app display the following diagram.
+In the above code, we use the bare `Widget` class to demonstrate the 
+sizing and positing behaviors. This app display the following diagram.
 
 ![Default Size Position Window](./images/0303.jpg)
 
 In a Windows desktop, a root widgets uses all space of the user 
 interface window. In my Windows 8.1 computer, 
-the Kivy root window has a default size of 1020 * 799, 
+the Kivy root window has a default size of 1020px * 799px, 
 i.e., a width of 1020 pixels and a height of 799 pixels. 
 The window has a default position that is on the top 
 right part of the computer screen. 
-A button widget has a default size of 100 * 100 pixels. 
+A button widget has a default size of 100px * 100px. 
 The default position is on the bottom left corner of its parent. 
 In the above diagram we can only see one button because one is 
 on top of the other one.
@@ -200,9 +201,40 @@ button_2.x = 100
 button_2.y = 300
 ```
 
+Similarly, Kivy uses `width`, `height` and `size` to specify a
+widget size. The following code in [./source/0304](./source/0304)
+increase each side of a widget to 150px: 
+
+```python
+from kivy.app import App
+from kivy.uix.widget import Widget
+from kivy.uix.button import Button
 
 
- 
+class SizePositionApp(App):
+    def build(self):
+        root_widget = Widget()
+        button_1 = Button()
+        button_1.pos = (100, 100)
+        button_1.size = (150, 150)
+        button_2 = Button()
+        button_2.x = 100
+        button_2.y = 300
+        button_2.width = 150
+        button_2.height = 150
+        root_widget.add_widget(button_1)
+        root_widget.add_widget(button_2)
+        return root_widget
 
 
+if __name__ == '__main__':
+    SizePositionApp().run()
+```
 
+The diagram is as the following: 
+
+![Set Size Window](./images/0305.jpg)
+
+Managing size and position is a complex task for any non-trivial 
+GUI application. Luckily, Kivy provides a rich set of layout class
+and methods to simplify this task. 
