@@ -240,3 +240,7 @@ The diagram is as the following:
 Managing size and position is a complex task for any non-trivial 
 GUI application. Luckily, Kivy provides a rich set of layout class
 and methods to simplify this task. 
+
+## Exercises:
+Try to play other widgets such as `Label` or `Image` to set
+their positions and sizes. 
