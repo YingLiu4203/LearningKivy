@@ -148,11 +148,15 @@ are in the (`./source/0203`)[./source/0203] folder.
 There is no magic happened in the above Kv file example. Here is what 
 happened to the Kv file: 
 
-* Kivy first loads and parses the Kv file, creates a `Label` object with 
-its `text` property set to "Hello World"
-* From the file name, Kivy is able to link the newly-created
-`Label` object to `HelloWorld` app class. This object 
-is used as the return value of its `build` method.
+* When Kivy starts, it creates a `HelloWorldApp` instance and tries
+to call its `build` method to create a user interface. 
+If there is no such method, it loads a matching kv file in 
+the same directory as the application file. Matching means the name
+of the kv file is the lowercase name of the App class, without 
+the `App` postfix. 
+* From the matching kv file, it creates a `Label` object with 
+its `text` property set to "Hello World". It display this 
+label as the user interface. 
 
 ## Exercises
 Please define a `HelloKivyApp` class to display a message "Hello KIvy". 

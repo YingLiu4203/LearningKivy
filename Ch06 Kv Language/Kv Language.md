@@ -1,4 +1,4 @@
-# Separation of UI from Code
+# Kv Language
 ## Separation of Concerns
 The developers of Kivy framework invented kvlang to create user interface.
 The motivation is the so-called [separation of concerns](http://en.wikipedia.org/wiki/Separation_of_concerns).
