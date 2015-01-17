@@ -20,9 +20,9 @@ However, many times we need to use Python code to manage
 a user interface dynamically. 
 
 A widget is represented by a subclass of the `kivy.uix.widget.Widget`
-class. A widget may properties such as id, color, text, font size, etc. 
-A widget may trigger some events such as touch down, touch move, 
-and touch up. For example, the following kvlang code
+class. A widget may have properties such as id, color, text, 
+font size, etc. A widget may trigger some events such as touch down, 
+touch move, and touch up. For example, the following kvlang code
 describes a `Label` element whose `text` property is "Hello World".
  
 ```
