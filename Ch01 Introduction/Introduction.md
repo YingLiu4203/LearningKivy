@@ -88,47 +88,102 @@ we use Python 2.7 to develop Kivy applications and run them in both
 desktop and mobile phones. 
 
 PyCharm is a great Python IDE that has many productivity features 
-to develop Python applications. The following are steps used to 
-setting up PyCharm for Kivy development in Windows.  
+to develop Python applications. PyCharm needs two interpreters 
+to edit and run a Kivy application: a project interpreter that 
+can find all Kivy modules/classes to get contextual help; 
+a bootstrap interpreter to load all libraries to run a Kivy
+application. 
 
-###### 1. Download Python 2.7.9 from https://www.python.org/downloads/. 
-Double-click the downloaded file to install it in Windows.  
-Assuming that your Python installation is in `C:\Python27\`, 
-add the following two paths to your PATH:
-`C:\Python27\;C:\Python27\Scripts\`
-###### 2. Download PyCharm 4.0.x from https://www.jetbrains.com/pycharm/download/.
-The professional edition is recommended for its rich functions. Run 
-the downloaded exe file to start the installation wizard. Follow the
-wizard instructions to install Pycharm.  
-###### 3. Download Kivy 1.8 for Python 2.7 from http://kivy.org/downloads/1.8.0/Kivy-1.8.0-py2.7-win32.zip.
-Unzip the download file to a folder, for example, `C:\kivy`. 
-###### 4. In Windows, run `cmd` as an administrator to open a shell window. 
+The following are steps used to setting up PyCharm for 
+Kivy development in Windows.  
+
+###### 1. Download Kivy 
+Download Kivy 1.8 for Python 2.7 from http://kivy.org/downloads/1.8.0/Kivy-1.8.0-py2.7-win32.zip.
+Unzip the download files to a folder, for example, `C:\kivy`. 
+In the folder, you should have a file named `kivy.bat` among other files.
+###### 2. Create a Symbol Link to `kivy.bat` 
+In Windows, run `cmd` as an administrator to open a shell window. 
 Go to `C:\kivy`, create a symbol link for `kivy.bat` using this command: 
 `mklink python.bat kivy.bat`. The `python.bat` file is a newly-created symbol 
-link of `kivy.bat`. 
-###### 5. Create a new Python project `hello_world` in PyCharm using the 
+link of `kivy.bat`.
+
+The reason that we create this symbolic link  is that the `kivy.bat` is 
+used to run a Kivy application. However, PyCharm requires an interpreter
+be named as `python.bat` or `python.exe`. 
+
+The `C:\kivy` folder should look as the following diagram:
+
+![Kivy Folder](./images/0101.jpg)
+
+###### 3. Download PyCharm 4.0.x from https://www.jetbrains.com/pycharm/download/.
+The professional edition is recommended for its rich functions. Run 
+the downloaded exe file to start the installation wizard. Follow the
+wizard instructions to install Pycharm.
+###### 4. Create a Project Interpreter for Code Editing
+Create a new Python project `hello_world` in PyCharm using the 
 `File --> New Project` menu . Click the tool icon on the right side of the 
-project interpreter drop list, click `More --> +` to add the 
-`C:\kivy\Python27\python..exe` as the project interpreter. I like to name
-it as `Kivy Python`. Then on the right side of this interpreter, click the 
+project interpreter list, click `Add Local` to add the 
+`C:\kivy\Python27\python.exe` as the project interpreter. 
+Below is the dialog: 
+
+![Add Local Dialog](./images/0102.jpg)
+
+Click OK, once in the `Setting` Window, click `Apply` to make it effective.
+
+###### 5. Add Kivy Module/Class Path to the Newly-added Interpreter 
+Click the tool icon on the right side of the project interpreter list, 
+click `More...` (the last item in the pop up window), select the newly
+added interpreter, following is the dialog:
+
+![Add More Dialog](./images/0103.jpg)
+
+Then on the right side of this dialog, click the 
 last icon (the path icon) and the plus icon to add the following path to 
-this `Kivy Python` interpreter: `C:\kivy\kivy`.
-###### 6. In `File --> settings`, under the `hello_world` project, click 
-`project interpreter`, click the tool icon on the right side of 
-the `Project Interpreter` to add a new interpreter named `Kivy Bootstrapper` 
-that uses the newly created symbol link `C:\kivy\python.bat` as the intepreter.
-###### 7. Create a `main.py` in the `hello_wolrd` project with the following two lines:
+this `Kivy Python` interpreter: `C:\kivy\kivy`.  Below is the dialog:
+
+![Add Path Dialog](./images/0104.jpg)
+
+Click OK two times to return to the `Setting` Window, click `Apply` 
+to make it effective. 
+
+Adding the `C:\kivy\kivy` path to the project interpreter allows 
+PyCharm to final all Kivy modules and class definitions to provide
+contextual editing helps. 
+###### 5. Create a Bootstrap InterpreterIn
+Click the tool icon on the right side of the 
+project interpreter list, click `Add Local` to add the 
+the newly created symbol link `C:\kivy\python.bat` as the interpreter.
+Click OK, once in the `Setting` Window, click `Apply` to make it effective.
+
+Now the PyCharm has two interpreters, make sure that the 
+`C:\kivy\Python27\python.exe` is the project interpreter. If not,
+select it and click `Apply` to make it the project interpreter.
+
+## A Testing App
+To verify that PyCharm is properly configured to run Kivy Applications, 
+we create a simple Kivy app that displays a blank 
+Window. 
+
+###### 1. Create a `main.py` Python File 
+Create a `main.py` in the `hello_world` project with the following two lines:
 
 ```python
 from kivy.app import App
 
 App().run()
 ```
+
 The file is create in [./source](./source) folder. 
-###### 8. In the `Run --> Edit Configurations` menu, click the plus button 
+###### 2. Create a New Configuration 
+In the `Run --> Edit Configurations` menu, click the plus button 
 to add a configuration called `Kivy Configuration`, use the `main.py` 
 as the script, use the `Kivy Bootstrapper` as the interpreter.
-###### 9. Run the `Kivy Configuration`, you should see a blank window. 
+Below is the configuration dialog:
+ 
+![Run Config Dialog](./images/0105.jpg)
 
-## Exercises
-Please try to create a Kivy application that displays "Hello Kivy" message. 
+###### 3. Run the App
+Run the app, you should see a blank window like below:
+
+![App Dialog](./images/0106.jpg)
+ 
