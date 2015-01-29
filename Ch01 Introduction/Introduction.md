@@ -1,4 +1,4 @@
-#Introduction
+# Introduction
 
 ## What is Kivy
 Kivy is an open source Python library used to develop multi-touch GUI 
