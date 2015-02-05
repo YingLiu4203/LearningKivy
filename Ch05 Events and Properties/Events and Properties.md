@@ -96,13 +96,15 @@ The `pos` property of a widget is an instance of `ReferenceListProperty`.
 When you read the property, it returns a tuple of Python values. 
 * `DictProperty`: it represents a dict. 
 
-Use of property events involves three steps: declare a property, 
-change a property value, handle a property event. 
+Use of property events involves fours steps: declare a property, 
+bind a property change event, change a property value, 
+and handle a property event. 
 
 ### 1. Property Declaration
-A Kivy property must be declared as a class attribute. 
-A Kivy property is an instance of the above property classes.
-Following is a widget class that has two properties: 
+A Kivy property must be declared as a **class**, not an instance, attribute. 
+A Kivy property is an instance of one of the above property classes.
+Following is a widget class ([./source/0501](./source/0501)) 
+that has two properties: 
 
 ```python
 class CustomBtn(Widget):
@@ -110,10 +112,64 @@ class CustomBtn(Widget):
     demo_prop = NumericProperty(0)
 ```
 
+### 2. Bind Property Change Event
+There are two approaches to bind a property change event: 
 
+* Inside a widget, define an instance method with a name `on_property_name`.
+* Outside a widget, use the `bind` bind method. 
 
-### 2. Change a Property Value
+In the code in [./source/0501](./source/0501), an event 
+handler is defined for each property using property names. 
 
+```python
+def on_pressed(self, instance, pos):
+    print 'pressed at {pos}'.format(pos=pos)
+
+def on_demo_prop(self, instance, value):
+    print 'on_demo_prop value changed to {}'.format(value)
+```
+
+Outside the widget, `bind` method is used to bind 
+ 
+```python
+cb.bind(pressed=self.btn_pressed)
+cb.bind(demo_prop=self.demo_changed)
+```
+
+### 3. Change a Property Value
+In the code in [./source/0501](./source/0501), the above 
+two properties are changed as when a `touch_down` event fires.
+When a `touch_down` event fires, the `on_touch_down` handler 
+is triggered. 
+
+```python
+def on_touch_down(self, touch):
+    if self.collide_point(*touch.pos):
+        self.pressed = touch.pos
+        return True
+    return super(CustomBtn, self).on_touch_down(touch)
+```
+
+If the touch down even is inside the `CustomBtn` widget, it 
+sets the `pressed` property to the touch position.
+  
+The `demo_prop` is changed in event handler of the `pressed` 
+property event: 
+
+```python
+self.cb.demo_prop += 1
+```
+
+A common use of property is to bind it to a widget such as a textbox, 
+when the textbox value changes, the property change event fires. 
+
+### 4. Handle a Property Event
+All handlers of a property change event are called when the 
+property value changes. In the code example in [./source/0501](./source/0501),
+a `touch_down` widget event triggers a number of property change events: 
+
+* Two handlers of the `pressed` property change event
+* Two handlers of the `demo_prop` property change event
 
 ## Event Dispatcher
 All Kivy widget classes are subclasses of the `EventDispatcher` Class.
