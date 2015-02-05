@@ -44,8 +44,8 @@ in the following sections.
 
 ## The `Property` Class
 A special kind of "event" sources is a widget property. A widget 
-usually has many properties such as its position, size, text 
-or any value that it manages. In many cases we want to be notified 
+usually has many properties such as its position, size, or text. 
+In many cases we want to be notified 
 when those values change. For example, when a widget changes it position 
 to a special zone, we want to change its color. Because this is 
 a very common requirement in a GUI application, Kivy defines a 
@@ -55,9 +55,10 @@ Similar to an event, a `Property` instance maintains a list of observers
 a `Property` instance changes, it calls its observers with two parameters: 
 the `Property`'s widget instance and the changed value. 
 
-A property of a widget is an instance of a `Property` class. It is not
-the Python built-in `property` class that is often used as a decorate
-`@property`. The `Property` class implements the observer pattern and 
+A property of a widget is an instance of the `Property` class. 
+It is not the Python built-in `property` class that 
+is often used with the `@property` decorator. 
+The `Property` class implements the observer pattern and 
 other special features such as value validation. 
 
 The `Property` class has the following event-related methods: 
@@ -69,6 +70,7 @@ an observer to a value change event.
 automatically when something happens. But we can fire an event using
 this method. 
 
+### Property Classes
 The `Property` class is the parent class for a number of type-specific 
 property types. This class should not be directly instantiated.
 The following are some common property classes that can be 
@@ -97,8 +99,21 @@ When you read the property, it returns a tuple of Python values.
 Use of property events involves three steps: declare a property, 
 change a property value, handle a property event. 
 
-### Property Declaration
+### 1. Property Declaration
 A Kivy property must be declared as a class attribute. 
+A Kivy property is an instance of the above property classes.
+Following is a widget class that has two properties: 
+
+```python
+class CustomBtn(Widget):
+    pressed = ListProperty([0, 0])
+    demo_prop = NumericProperty(0)
+```
+
+
+
+### 2. Change a Property Value
+
 
 ## Event Dispatcher
 All Kivy widget classes are subclasses of the `EventDispatcher` Class.

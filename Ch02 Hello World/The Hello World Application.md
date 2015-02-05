@@ -102,9 +102,9 @@ the following picture in Kivy's document web site.
 ![Kivy App Life Cycle](http://kivy.org/docs/_images/Kivy_App_Life_Cycle.png)
 
 ## Using a Kv File for User Interface
-As mention in the above section, the second approach to define a 
-user interface is to use the Kv language. The Kv language, often referred 
-to as `kvlang`, is a simple markup language like HTML. It allows developers
+The second approach to define a user interface is to use the Kv language. 
+The Kv language, often referred to as `kvlang`, 
+is a simple markup language like HTML. It allows developers
 to specify a user interface using a simple, clear markup language that has
 a strong Python taste. 
 
@@ -114,7 +114,6 @@ class to make it an empty class. The following is the Python code.
 
 ```python
 from kivy.app import App
-from kivy.uix.label import Label
 
 
 class HelloWorldApp(App):
@@ -145,7 +144,7 @@ class and we can see the same user interface. The whole application
 are in the (`./source/0203`)[./source/0203] folder. 
 
 ## No Magic
-There is no magic happened in the above Kv file example. Here is what 
+There is no magic in the above Kv file example. Here is what 
 happened to the Kv file: 
 
 * When Kivy starts, it creates a `HelloWorldApp` instance and tries
@@ -159,6 +158,6 @@ its `text` property set to "Hello World". It display this
 label as the user interface. 
 
 ## Exercises
-Please define a `HelloKivyApp` class to display a message "Hello KIvy". 
+Please define a `HelloKivyApp` class to display a message "Hello Kivy". 
 Then write another application that use a Kv file, 
 instead of Python code, to display the same message.  
