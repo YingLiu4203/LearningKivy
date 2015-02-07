@@ -24,14 +24,15 @@ events. For example, an application generates `on_start`, `on_stop`,
 resumes from a pause. Additionally, when a widget changes its 
 position or size, it raises an event.
 
-In Kivy, events are grouped into two categories based on the
+In Kivy, events are grouped into three categories based on the
 sources of events:
 
+* Application and user-defined events: application lifecycle event,
+clock timeout etc.
 * Property event: this is an event fired when a 
 widget's property changes. For example, a position or a size change.
 * Widget-defined event: this includes all other events such as
-button pressed, screen touch done, clock timeout, application
-lifecycle status change etc.
+button pressed, screen touch done etc.
 
 Because a widget knows all its property changes, it uses a 
 so-called observer pattern to bind and dispatch its property events. 
@@ -39,8 +40,59 @@ Widget-defined events use a `EventDispatcher` class to
 bind and dispatch these events. The basic usage pattern 
 of the two event types is the same: we bind a callback to an event. 
 When the event fires, the callback is executed. 
-There are some differences between them that will be explained 
-in the following sections. 
+
+## Scheduling an Event
+A commonly used user-defined event is a clock event. For example,  
+the call `Clock.schedule_interval(my_callback, 1/30.0)` schedules
+an event that fires 30 times a second. When it fires, it calls 
+`my_callback` function. 
+
+Following is an example from [Kivy events doc](http://kivy.org/docs/guide/events.html).
+
+```python
+count = 0
+def my_callback(dt):
+    global count
+    count += 1
+    if count == 10:
+        print 'Last call of my callback, bye bye !'
+        return False
+    print 'My callback is called'
+Clock.schedule_interval(my_callback, 1 / 30.0)
+```
+
+A full sample can be found in [./source/0501](./source/0501). 
+In the above code, the event is unscheduled when its handler returns `False`.
+Another way to unschedule it is to use `Clock.unschedule(my_callback)`
+
+To fire an event only once, use `Clock.schedule_once` method.  It takes
+two arguments: the first is an event handler; the second is a timer that
+the event fires. If the time is a positive number, it calls the event
+handler in the specified number of seconds. If it is 0, it fires in the 
+next event loop (frame). If it is `-1`, it calls the event handler
+in the current event loop.
+
+If schedule an event only once, use 
+`Clock.schedule_once(my_callback, num_seconds)`. It fires the event in
+the specified number of seconds. This is often used to change a 
+schedule in re-schedule event in each call. For example: 
+ 
+```python
+def my_callback(dt):
+    print 'My callback is called !'
+    Clock.schedule_once(my_callback, 1)
+Clock.schedule_once(my_callback, 1)
+```
+
+If the purpose is to trigger an event only once in the next frame, use
+the following code: 
+
+```python
+trigger = Clock.create_trigger(my_callback)
+# later
+trigger()
+```
+
 
 ## The `Property` Class
 A special kind of "event" sources is a widget property. A widget 
@@ -96,14 +148,15 @@ The `pos` property of a widget is an instance of `ReferenceListProperty`.
 When you read the property, it returns a tuple of Python values. 
 * `DictProperty`: it represents a dict. 
 
+### Property Events
 Use of property events involves fours steps: declare a property, 
 bind a property change event, change a property value, 
 and handle a property event. 
 
-### 1. Property Declaration
+#### 1. Property Declaration
 A Kivy property must be declared as a **class**, not an instance, attribute. 
 A Kivy property is an instance of one of the above property classes.
-Following is a widget class ([./source/0501](./source/0501)) 
+Following is a widget class ([./source/0502](./source/0502)) 
 that has two properties: 
 
 ```python
@@ -112,7 +165,7 @@ class CustomBtn(Widget):
     demo_prop = NumericProperty(0)
 ```
 
-### 2. Bind Property Change Event
+#### 2. Bind Property Change Event
 There are two approaches to bind a property change event: 
 
 * Inside a widget, define an instance method with a name `on_property_name`.
@@ -136,7 +189,7 @@ cb.bind(pressed=self.btn_pressed)
 cb.bind(demo_prop=self.demo_changed)
 ```
 
-### 3. Change a Property Value
+#### 3. Change a Property Value
 In the code in [./source/0501](./source/0501), the above 
 two properties are changed as when a `touch_down` event fires.
 When a `touch_down` event fires, the `on_touch_down` handler 
@@ -163,7 +216,7 @@ self.cb.demo_prop += 1
 A common use of property is to bind it to a widget such as a textbox, 
 when the textbox value changes, the property change event fires. 
 
-### 4. Handle a Property Event
+#### 4. Handle a Property Event
 All handlers of a property change event are called when the 
 property value changes. In the code example in [./source/0501](./source/0501),
 a `touch_down` widget event triggers a number of property change events: 
@@ -185,6 +238,7 @@ automatically when something happens. But we can fire an event too.
 * `get_property_observers()`: return a list of handlers bound to 
 an event (a widget_defined event or a property event)
 
+### How Event Dispatcher Works
 
 
 

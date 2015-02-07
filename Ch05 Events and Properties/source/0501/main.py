@@ -1,50 +1,35 @@
 # -*- coding: utf-8 -*-
 
 from kivy.app import App
-from kivy.uix.widget import Widget
-from kivy.uix.button import Button
-from kivy.uix.boxlayout import BoxLayout
-from kivy.properties import ListProperty, NumericProperty
+from kivy.clock import Clock
 
+count = 0
+def my_callback(dt):
+    global count
+    count += 1
+    if count == 10:
+        print 'Last call of my callback, bye bye !'
 
-class CustomBtn(Widget):
-    pressed = ListProperty([0, 0])
-    demo_prop = NumericProperty(0)
+        # schedule once in 10 seconds later
+        # Clock.schedule_once(my_callback, 10)
 
-    def on_touch_down(self, touch):
-        if self.collide_point(*touch.pos):
-            self.pressed = touch.pos
-            return True
-        return super(CustomBtn, self).on_touch_down(touch)
+        # cancel the schedule event
+        return False
 
-    def on_pressed(self, instance, pos):
-        print 'pressed at {pos}'.format(pos=pos)
+        # another method to unschedule
+        # Clock.unschedule(my_callback)
 
-    def on_demo_prop(self, instance, value):
-        print 'on_demo_prop value changed to {}'.format(value)
+        # trigger an event in the next frame
+        # trigger = Clock.create_trigger(my_callback)
+        # trigger()
 
-class RootWidget(BoxLayout):
-    def __init__(self, **kwargs):
-        super(RootWidget, self).__init__(**kwargs)
-        self.add_widget(Button(text='btn 1'))
-        cb = CustomBtn()
-        cb.bind(pressed=self.btn_pressed)
-        cb.bind(demo_prop=self.demo_changed)
-        self.add_widget(cb)
-        self.cb = cb
-        self.add_widget(Button(text='btn 2'))
+    print 'My callback is called'
 
-    def btn_pressed(self, instance, pos):
-        print 'pos: printed from root widget: {pos}'.format(pos=pos)
-        self.cb.demo_prop += 1
-
-    def demo_changed(self, instance, value):
-        print 'demo changed to {}'.format(value)
-
-
-class EventDemoApp(App):
-    def build(self):
-        return RootWidget()
+class HelloWorldApp(App):
+    pass
 
 if __name__ == '__main__':
-    EventDemoApp().run()
+
+    Clock.schedule_interval(my_callback, 1 / 30.0)
+
+    HelloWorldApp().run()
