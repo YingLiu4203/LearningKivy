@@ -18,6 +18,8 @@ A minimum program `main.py` is created in the [`./source0201`](./source/0201)
 subdirectory. It has the following content: 
 
 ```python
+# -*- coding: utf-8 -*-
+
 from kivy.app import App
 
 
