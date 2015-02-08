@@ -218,7 +218,7 @@ when the textbox value changes, the property change event fires.
 
 #### 4. Handle a Property Event
 All handlers of a property change event are called when the 
-property value changes. In the code example in [./source/0501](./source/0501),
+property value changes. In the code example in [./source/0503](./source/0503),
 a `touch_down` widget event triggers a number of property change events: 
 
 * Two handlers of the `pressed` property change event
@@ -239,7 +239,165 @@ automatically when something happens. But we can fire an event too.
 an event (a widget_defined event or a property event)
 
 ### How Event Dispatcher Works
+The implementation of an event dispatcher is pretty simple. 
+There are only two steps to define an event dispatcher: 
 
+1. Register an event type. Event type name must start with the prefix `on_`.
+2. Create a default handler method that has the same same as the event type.
+This default handler is called when an event of its event type fires. 
+If there is nothing to do in a default handler, the method can be an 
+empty method as shown in the following example. 
+
+An event fires by calling an event dispatcher's `dispatch()` method. 
+To use an event, bind a callback to the event type defined
+As shown in the above sample, binding can be done by either
+calling `bind()` method or following the `on_event_type()`
+method name convention.
+
+The code in [./source/0504](./source/0504) is adapted from 
+[Kivy events and properties guide](http://kivy.org/docs/guide/events.html). 
+
+```python
+class MyEventDispatcher(EventDispatcher):
+    def __init__(self, **kwargs):
+        self.register_event_type('on_test')
+        super(MyEventDispatcher, self).__init__(**kwargs)
+
+    def on_test(self, *args):
+        pass
+
+
+def my_callback(value, *args):
+    print "Hello, I got an event!", args
+
+
+class HelloWorldApp(App):
+    pass
+
+if __name__ == '__main__':
+
+    ev = MyEventDispatcher()
+    ev.bind(on_test=my_callback)
+    ev.dispatch('on_test', 'test_message')
+
+    HelloWorldApp().run()
+```
+
+## Widget Events
+A widget is a subclass of `EventDispatcher`. Therefore it 
+can bind event and dispatch event. A widget also has many properties 
+that support binding and call callbacks when their values change.  
+
+An event callback is usually called with one argument that is the widget itself. 
+A property callback is usually called with two arguments: a widget and its
+new property value. 
+
+### A Custom Widget Event
+The code in [./source/0505](./source/0505)
+demonstrates a custom event type for a widget. 
+
+```python
+class MyWidget(Widget):
+    def __init__(self, **kwargs):
+        super(MyWidget, self).__init__(**kwargs)
+        self.register_event_type('on_custom_event')
+
+    def trigger_custom_event(self, *args):
+        self.dispatch('on_custom_event', 'test message')
+
+    def on_custom_event(self, *args):
+        pass
+
+
+def on_custom_callback(*args):
+    print 'my on_custom_event is called with {}'.format(args)
+
+
+class HelloWorldApp(App):
+    def build(self):
+        w = MyWidget()
+        w.bind(on_custom_event=on_custom_callback)
+        Clock.schedule_once(w.trigger_custom_event, 3)
+
+        return w
+
+
+if __name__ == '__main__':
+
+    HelloWorldApp().run()
+```
+
+### A Widget Event Demo
+Following is an example copied from [Kivy EventDispatcher API reference](http://kivy.org/docs/api-kivy.event.html#kivy.event.EventDispatcher).
+
+```python
+from kivy.uix.boxlayout import BoxLayout
+from kivy.app import App
+from kivy.uix.button import Button
+from functools import partial
+
+
+class DemoBox(BoxLayout):
+    """
+    This class demonstrates various techniques that can be used for binding to
+    events. Although parts could me made more optimal, advanced Python concepts
+    are avoided for the sake of readability and clarity.
+    """
+    def __init__(self, **kwargs):
+        super(DemoBox, self).__init__(**kwargs)
+        self.orientation = "vertical"
+
+        # We start with binding to a normal event. The only argument
+        # passed to the callback is the object which we have bound to.
+        btn = Button(text="Normal binding to event")
+        btn.bind(on_press=self.on_event)
+
+        # Next, we bind to a standard property change event. This typically
+        # passes 2 arguments: the object and the value
+        btn2 = Button(text="Normal binding to a property change")
+        btn2.bind(state=self.on_property)
+
+        # Here we use anonymous functions (a.k.a lambdas) to perform binding.
+        # Their advantage is that you can avoid declaring new functions i.e.
+        # they offer a concise way to "redirect" callbacks.
+        btn3 = Button(text="Using anonymous functions.")
+        btn3.bind(on_press=lambda x: self.on_event(None))
+
+        # You can also declare a function that accepts a variable number of
+        # positional and keyword arguments and use introspection to determine
+        # what is being passed in. This is very handy for debugging as well
+        # as function re-use. Here, we use standard event binding to a function
+        # that accepts optional positional and keyword arguments.
+        btn4 = Button(text="Use a flexible function")
+        btn4.bind(on_press=self.on_anything)
+
+        # Lastly, we show how to use partial functions. They are sometimes
+        # difficult to grasp, but provide a very flexible and powerful way to
+        # reuse functions.
+        btn5 = Button(text="Using partial functions. For hardcores.")
+        btn5.bind(on_press=partial(self.on_anything, "1", "2", monthy="python"))
+
+        for but in [btn, btn2, btn3, btn4, btn5]:
+            self.add_widget(but)
+
+    def on_event(self, obj):
+        print("Typical event from", obj)
+
+    def on_property(self, obj, value):
+        print("Typical property change from", obj, "to", value)
+
+    def on_anything(self, *args, **kwargs):
+        print('The flexible function has *args of', str(args),
+            "and **kwargs of", str(kwargs))
+
+
+class DemoApp(App):
+    def build(self):
+        return DemoBox()
+
+if __name__ == "__main__":
+    DemoApp().run()
+```
 
 
 

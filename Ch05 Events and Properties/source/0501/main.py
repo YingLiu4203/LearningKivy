@@ -25,6 +25,7 @@ def my_callback(dt):
 
     print 'My callback is called'
 
+
 class HelloWorldApp(App):
     pass
 
