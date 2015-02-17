@@ -19,42 +19,49 @@ for creating a user interface.
 As we can tell from the previous samples, using kvlang to specify 
 a widget tree is simpler and easy to understand. 
 
-Key concepts:
+## Loading KV Files
+There are two methods to load a KV file to a Kivy applicatoin. 
 
-load by name matching
-load by Builder: file or string
+1. By Name Matching
+During application start, Kivy looks for a KV file that matches the 
+application class name. Matching means the same name that is lower case, 
+doesn't have the ending 'App' and has a postfix of `.kv`.  
+For example, if the app class name is `HelloWorldApp`, the kv file
+name should be `helloworld.kv`. 
+2. Loading by Kivy Builder class: 
 Both the load_file() and the load_string() methods return the root 
-widget defined in your kv file/string. They will also add any 
-class and template definitions to the Factory for later usage.
+widget defined in a kv file or a string. They will also add any 
+class defined in the kv file or string. 
 
-Three constructs: rule, root, class. Another construct, template, 
-is deprecated by dynamic classes.
+The following is an example from [GitHub Kivy examples]( https://github.com/kivy/kivy/blob/master/examples/widgets/label_with_markup.py)
 
-#: import name x.y.z
-#: set name value
+```python
+from kivy.app import App
+from kivy.lang import Builder
+
+root = Builder.load_string('''
+Label:
+    text:
+        ('[b]Hello[/b] [color=ff0099]World[/color]\\n'
+        '[color=ff0099]Hello[/color] [b]World[/b]\\n'
+        '[b]Hello[/b] [color=ff0099]World[/color]')
+    markup: True
+    font_size: '64pt'
+''')
 
 
-property: expression. All properties used in the expression 
-will be observed !!!
+class LabelWithMarkup(App):
+    def build(self):
+        return root
 
-Event binding: on_event: callback(args[1]), args is the event arguments.
+if __name__ == '__main__':
+    LabelWithMarkup().run()
+```
 
-Kvlang used id -- like a class level variable. 
 
-A sample to demo weak reference. id.__self__
+## Kv Constructors and Syntax
 
-All ids are stored in self.ids attribute.
-
-A template is a dynamic class that can be used by other widgets.
- 
-Multiple widgets can share styles <w1, w2>: 
-
-[Kvlang Reference](http://kivy.org/docs/api-kivy.lang.html)
-
-The content can contain rule definitions, a root widget, or 
-dynamic class definitions.
-
-The content of the file should always start with the Kivy header, 
+The content of a Kv file should always start with the Kivy header, 
 where version must be replaced with the Kivy language 
 version you’re using. For now, use 1.0:
 
@@ -63,16 +70,32 @@ version you’re using. For now, use 1.0:
 # content here
 ```
 
-The content can contain rule definitions, a root widget, and 
-dynamic class definitions
+The content of a kv file has a set of rules that describe one root widget and 
+a set of dynamic classes. A root widget is a widget
+appears in the left most position. All child widgets are indented. 
+A dynamic class is defined between the `<>` and followed by `:`. 
+It defines the appearance and properties of an instance of the widget class.
+Additionally, it allows name importing and variable declaration using 
+the following syntax: 
+
+```
+#: import name x.y.z
+#: set name value
+```
+
+
+### Kv Syntax
+
+The following are syntax definitions defined in 
+[Kvlang Reference](http://kivy.org/docs/api-kivy.lang.html). 
 
 ```
 # Syntax of a rule definition. Note that several Rules can share the same
 # definition (as in CSS). Note the braces: they are part of the definition.
-<Rule1,Rule2>:
+<W1, W2>:
     # .. definitions ..
 
-<Rule3>:
+<W3>:
     # .. definitions ..
 
 # Syntax for creating a root widget
@@ -84,8 +107,10 @@ RootClassName:
     # .. definitions ..
 ```
 
-Regardless of whether it’s a rule, root widget, dynamic class 
-or template you’re defining, the definition should look like this:
+ 
+Multiple widgets can share styles using a syntax `1<w1, w2>:`. 
+Regardless of whether it’s a root widget or a dynamic class, 
+the definition should look like this:
 
 ```
 # With the braces it's a rule. Without them, it's a root widget.
@@ -104,16 +129,18 @@ or template you’re defining, the definition should look like this:
 ```
 
 Here prop1 and prop2 are the properties of ClassName and prop3 
-is the property of AnotherClass. If the widget doesn’t have a property 
-with the given name, an ObjectProperty will be automatically 
-created and added to the widget. AnotherClass will be created and added 
+is the property of AnotherClass. If the widget doesn't have a property 
+with the given name, a property will be automatically 
+created and added to the widget. In the above example, an
+instance of the `AnotherClass` will be created and added 
 as a child of the ClassName instance.
 
-### Property Values
-When you specify a property’s value, the value is evaluated 
-as a Python expression. This expression can be static or dynamic, 
-which means that the value can use the values of other 
-properties using reserved keywords.
+### Expression in Property Values or Event Callbacks
+
+When you specify a property’s value or an event callback, 
+the value is evaluated as a Python expression. This expression 
+can be static or dynamic, which means that the value can 
+use the values of other properties using reserved keywords.
 
 Some keywords:
 
@@ -151,6 +178,7 @@ on_state:
         print('normal')
 ```
 
+## Kv Properties and Events
 The Kivy language detects properties in your value expression and 
 will create create callbacks to automatically update the property 
 via your expression when changes occur. For example,
@@ -171,7 +199,7 @@ button (We also convert the state to a string representation).
 Now, whenever the button state changes, the text property 
 will be updated automatically.
 
-### Dynamic Classes
+## Dynamic Classes
 
 Dynamic classes allow you to create new widgets on-the-fly, 
 without any python declaration in the first place. 
@@ -211,3 +239,68 @@ from kivy.factory import Factory
 button_inst = Factory.ImageButton()
 ```
 
+## Accessing Widgets Defined in Kv File
+
+```
+<MyFirstWidget>:
+    # both these variables can be the same name and this doesn't lead to
+    # an issue with uniqueness as the id is only accessible in kv.
+    txt_inpt: txt_inpt
+    Button:
+        id: f_but
+    TextInput:
+        id: txt_inpt
+        text: f_but.state
+        on_text: root.check_status(f_but)
+```
+
+```python
+class MyFirstWidget(BoxLayout):
+
+    txt_inpt = ObjectProperty(None)
+
+    def check_status(self, btn):
+        print('button state is: {state}'.format(state=btn.state))
+        print('text input text is: {txt}'.format(txt=self.txt_inpt))
+```
+
+## Kivy `weakref` id
+
+The example demonstrates the `weakref` type of widget id. 
+
+```
+<MyWidget>:
+    label_widget: label_widget
+    Button:
+        text: 'Add Button'
+        on_press: root.add_widget(label_widget)
+    Button:
+        text: 'Remove Button'
+        on_press: root.remove_widget(label_widget)
+    Label:
+        id: label_widget
+        text: 'widget'
+```
+
+The Python code: 
+
+```python
+from kivy.app import  App
+from kivy.uix.boxlayout import BoxLayout
+
+
+class MyWidget(BoxLayout):
+    pass
+
+
+class KvDemoApp(App):
+    def build(self):
+        return MyWidget()
+
+
+if __name__ == '__main__':
+    KvDemoApp().run()
+```
+
+To see the demo, run the code, click the remove button, resize
+the screen, then click the add button. 
