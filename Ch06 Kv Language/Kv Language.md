@@ -241,6 +241,7 @@ button_inst = Factory.ImageButton()
 
 ## Accessing Widgets Defined in Kv File
 
+
 ```
 <MyFirstWidget>:
     # both these variables can be the same name and this doesn't lead to
@@ -255,6 +256,11 @@ button_inst = Factory.ImageButton()
 ```
 
 ```python
+from kivy.app import App
+from kivy.factory import Factory
+from kivy.uix.boxlayout import BoxLayout
+from kivy.properties import ObjectProperty
+
 class MyFirstWidget(BoxLayout):
 
     txt_inpt = ObjectProperty(None)
@@ -262,6 +268,15 @@ class MyFirstWidget(BoxLayout):
     def check_status(self, btn):
         print('button state is: {state}'.format(state=btn.state))
         print('text input text is: {txt}'.format(txt=self.txt_inpt))
+
+
+class KvDemoApp(App):
+    def build(self):
+        return MyFirstWidget()
+
+
+if __name__ == '__main__':
+    KvDemoApp().run()
 ```
 
 ## Kivy `weakref` id
@@ -269,7 +284,7 @@ class MyFirstWidget(BoxLayout):
 The example demonstrates the `weakref` type of widget id. 
 
 ```
-<MyWidget>:
+<MyWidget@BoxLayout>:
     label_widget: label_widget
     Button:
         text: 'Add Button'
@@ -285,17 +300,14 @@ The example demonstrates the `weakref` type of widget id.
 The Python code: 
 
 ```python
-from kivy.app import  App
-from kivy.uix.boxlayout import BoxLayout
-
-
-class MyWidget(BoxLayout):
-    pass
+from kivy.app import App
+from kivy.factory import Factory
 
 
 class KvDemoApp(App):
     def build(self):
-        return MyWidget()
+        my_widget = Factory.MyWidget()
+        return my_widget
 
 
 if __name__ == '__main__':

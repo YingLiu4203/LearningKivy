@@ -1,14 +1,11 @@
-from kivy.app import  App
-from kivy.uix.boxlayout import BoxLayout
-
-
-class MyWidget(BoxLayout):
-    pass
+from kivy.app import App
+from kivy.factory import Factory
 
 
 class KvDemoApp(App):
     def build(self):
-        return MyWidget()
+        my_widget = Factory.MyWidget()
+        return my_widget
 
 
 if __name__ == '__main__':
