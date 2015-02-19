@@ -1,5 +1,4 @@
 from kivy.app import App
-from kivy.factory import Factory
 from kivy.uix.boxlayout import BoxLayout
 from kivy.properties import ObjectProperty
 
