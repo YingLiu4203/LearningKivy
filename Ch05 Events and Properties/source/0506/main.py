@@ -25,45 +25,37 @@ def box_layout_td(text, instance, touch):
 
 
 def root_td(instance, touch):
-    is_inside = instance.collide_point( *touch.pos )
-    message = "Root BoxLayout touch down. Pos {0}, is inside {1}."
-    print message.format(touch.pos, is_inside)
+    box_layout_td('Root', instance, touch)
 
 
 def row1_td(instance, touch):
-    is_inside = instance.collide_point( *touch.pos )
-    message = "Row 1 BoxLayout touch down. Pos {0}, is inside {1}."
-    print message.format(touch.pos, is_inside)
+    box_layout_td('Row1', instance, touch)
 
 
 def row2_td(instance, touch):
-    is_inside = instance.collide_point( *touch.pos )
-    message = "Row 2 BoxLayout touch down. Pos {0}, is inside {1}."
-    print message.format(touch.pos, is_inside)
+    box_layout_td('Row2', instance, touch)
 
 
 class LayoutDemoApp(App):
     def build(self):
-        root = BoxLayout(orientation='vertical')
-        root.bind(on_touch_down=root_td)
-
-        r1 = BoxLayout()
         button11 = MyButton(text='R1C1')
         button12 = MyButton(text='R1C2')
-        r1.bind(on_touch_down=row1_td)
-
+        r1 = BoxLayout()
         r1.add_widget(button11)
         r1.add_widget(button12)
+        r1.bind(on_touch_down=row1_td)
 
-        r2 = BoxLayout()
-        r2.bind(on_touch_down=row2_td)
         button21 = MyButton(text='R2C1')
         button22 = MyButton(text='R2C2')
+        r2 = BoxLayout()
         r2.add_widget(button21)
         r2.add_widget(button22)
+        r2.bind(on_touch_down=row2_td)
 
+        root = BoxLayout(orientation='vertical')
         root.add_widget(r1)
         root.add_widget(r2)
+        root.bind(on_touch_down=root_td)
         return root
 
 if __name__ == '__main__':

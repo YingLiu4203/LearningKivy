@@ -218,7 +218,7 @@ when the textbox value changes, the property change event fires.
 
 #### 4. Handle a Property Event
 All handlers of a property change event are called when the 
-property value changes. In the code example in [./source/0503](./source/0503),
+property value changes. In the code example in [./source/0502](./source/0502),
 a `touch_down` widget event triggers a number of property change events: 
 
 * Two handlers of the `pressed` property change event
