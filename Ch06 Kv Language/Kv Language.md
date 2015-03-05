@@ -108,7 +108,7 @@ RootClassName:
 ```
 
  
-Multiple widgets can share styles using a syntax `1<w1, w2>:`. 
+Multiple widgets can share styles using a syntax `<w1, w2>:`. 
 Regardless of whether it’s a root widget or a dynamic class, 
 the definition should look like this:
 
@@ -180,7 +180,7 @@ on_state:
 
 ## Kv Properties and Events
 The Kivy language detects properties in your value expression and 
-will create create callbacks to automatically update the property 
+will create callbacks to automatically update the property 
 via your expression when changes occur. For example,
 
 ```
@@ -240,7 +240,7 @@ button_inst = Factory.ImageButton()
 ```
 
 ## Accessing Widgets Defined in Kv File
-
+A sample application: 
 
 ```
 <MyFirstWidget>:
