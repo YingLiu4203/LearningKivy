@@ -204,8 +204,13 @@ as it involves less overhead and avoids creating new instructions.
 ## Examples
 
 [rotation button](https://github.com/kivy/kivy/blob/master/examples/canvas/rotation.py)
+
 [draw shapes](https://github.com/kivy/kivy/blob/master/examples/canvas/lines_extended.py)
+
 [repeat texture](https://github.com/kivy/kivy/blob/master/examples/canvas/repeat_texture.py)
+
 [canvas stress](https://github.com/kivy/kivy/blob/master/examples/canvas/canvas_stress.py)
+
 [control circle](https://github.com/kivy/kivy/blob/master/examples/canvas/circle.py)
+
 [animation](https://github.com/kivy/kivy/blob/master/examples/animation/animate.py)
