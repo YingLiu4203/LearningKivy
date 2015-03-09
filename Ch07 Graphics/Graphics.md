@@ -131,6 +131,45 @@ other instructions.
 You can keep a reference to your instructions and update them:
 
 ```python
+from kivy.app import App
+from kivy.graphics.vertex_instructions import Rectangle
+from kivy.graphics import Color
+from kivy.uix.widget import Widget
+
+
+class MyWidget(Widget):
+    def __init__(self, **kwargs):
+        super(MyWidget, self).__init__(**kwargs)
+        with self.canvas:
+            Color(1, 0, 0, .5, mode='rgba')
+            self.rect = Rectangle(pos=self.pos, size=self.size)
+
+        self.bind(pos=self.update_rect)
+        self.bind(size=self.update_rect)
+
+    def update_rect(self, *args):
+        self.rect.pos = self.pos
+        self.rect.size = (self.size[0] / 2, self.size[1] / 2)
+
+
+class MyApp(App):
+    def build(self):
+        return MyWidget()
+
+
+if __name__ == '__main__':
+    MyApp().run()
+```
+
+Or you can clean your canvas and start fresh:
+
+```python
+from kivy.app import App
+from kivy.graphics.vertex_instructions import Rectangle
+from kivy.graphics import Color
+from kivy.uix.widget import Widget
+
+
 class MyWidget(Widget):
     def __init__(self, **kwargs):
         super(MyWidget, self).__init__(**kwargs)
@@ -142,26 +181,31 @@ class MyWidget(Widget):
 
     def update_rect(self, *args):
         self.rect.pos = self.pos
-        self.rect.size = self.size
-```
-
-Or you can clean your canvas and start fresh:
-
-```python
-class MyWidget(Widget):
-    def __init__(self, **kwargs):
-        super(MyWidget, self).__init__(**kwargs)
-        self.draw_my_stuff()
-
-        self.bind(pos=self.draw_my_stuff)
-        self.bind(size=self.draw_my_stuff)
-
-    def draw_my_stuff(self):
+        self.rect.size = (self.size[0] / 2, self.size[1] / 2)
         self.canvas.clear()
-
         with self.canvas:
-            self.rect = Rectangle(pos=self.pos, size=self.size)
+            Color(1, 0, 0, .5, mode='rgba')
+            rect_size = (self.size[0] / 2, self.size[1] / 2)
+            self.rect = Rectangle(pos=self.pos, size=rect_size)
+
+
+class MyApp(App):
+    def build(self):
+        return MyWidget()
+
+
+if __name__ == '__main__':
+    MyApp().run()
 ```
 
 Note that updating the instructions is considered the best practice 
 as it involves less overhead and avoids creating new instructions.
+
+## Examples
+
+[rotation button](https://github.com/kivy/kivy/blob/master/examples/canvas/rotation.py)
+[draw shapes](https://github.com/kivy/kivy/blob/master/examples/canvas/lines_extended.py)
+[repeat texture](https://github.com/kivy/kivy/blob/master/examples/canvas/repeat_texture.py)
+[canvas stress](https://github.com/kivy/kivy/blob/master/examples/canvas/canvas_stress.py)
+[control circle](https://github.com/kivy/kivy/blob/master/examples/canvas/circle.py)
+[animation](https://github.com/kivy/kivy/blob/master/examples/animation/animate.py)
