@@ -284,7 +284,7 @@ if __name__ == '__main__':
 The example demonstrates the `weakref` type of widget id. 
 
 ```
-<MyWidget@BoxLayout>:
+<MyWidget>:
     label_widget: label_widget
     Button:
         text: 'Add Button'
@@ -301,12 +301,15 @@ The Python code:
 
 ```python
 from kivy.app import App
-from kivy.factory import Factory
+from kivy.uix.boxlayout import BoxLayout
 
+
+class MyWidget(BoxLayout):
+    pass
 
 class KvDemoApp(App):
     def build(self):
-        my_widget = Factory.MyWidget()
+        my_widget = MyWidget()
         return my_widget
 
 
@@ -315,4 +318,4 @@ if __name__ == '__main__':
 ```
 
 To see the demo, run the code, click the remove button, resize
-the screen, then click the add button. 
+the screen, then click the add button.  

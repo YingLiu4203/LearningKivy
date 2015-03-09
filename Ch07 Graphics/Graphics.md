@@ -13,7 +13,20 @@ Instructions can be executed before, during and after canvas rendering.
 draw graphics. When a resource has a setup procedure before its use and 
 a cleanup procedure after its use, the `with` statement is 
 handy in this situation. The [Understanding Python's "with" statement](http://effbot.org/zone/python-with-statement.htm)
-is a good introduction to this concept. 
+is a good introduction to this concept. The following is 
+a customized simple example from the article. 
+ 
+```python
+class controlled_execution(object):
+        def __enter__(self):
+            print "set things up"
+            return 8
+        def __exit__(self, type, value, traceback):
+            print "tear things down"
+
+with controlled_execution() as thing:
+         print thing
+```
 
 ## Context Instructions
 [Context instructions](http://kivy.org/docs/api-kivy.graphics.context_instructions.html#)
@@ -22,6 +35,7 @@ Some context instructions are matrix manipulation instructions used
 to rotate, translate, and scale context. Other instructions include 
 color manipulations and texture binding instructions. 
 
+### Texture Instructions
 A texture is an image that can be applied to a canvas. A common usage 
 is to apply a set of 2D images to a 3D object. A texture has attributes
 such as size, format, and color ect. 
